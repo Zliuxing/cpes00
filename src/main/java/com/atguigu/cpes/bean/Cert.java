@@ -1,7 +1,7 @@
 package com.atguigu.cpes.bean;
 
 /**
- *  @author 
+ *  @author qweqweqweqwe
  */
 public class Cert {
     private Integer id;
