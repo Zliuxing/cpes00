@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.cpes.dao.CerttypeDao">
+
+    <select id="queryAll" resultType="certtype">
+        select * from t_cert_type
+    </select>
+    
+    <insert id="insertCerttype">
+        insert into t_cert_type ( acctype,certid ) values ( #{acctype}, #{certid} )
+    </insert>
+
+    <delete id="deleteCerttype">
+        delete from t_cert_type where acctype = #{acctype} and certid = #{certid}
+    </delete>
+
+</mapper>

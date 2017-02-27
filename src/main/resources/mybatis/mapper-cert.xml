@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.atguigu.cpes.dao.CertDao">
+
+    <select id="queryCertByAcctype" resultType="cert">
+        select
+            *
+        from t_cert
+        where id in (
+            select certid from t_cert_type where acctype = #{acctype}
+        )
+    </select>
+
+    <select id="queryAll" resultType="cert">
+        select * from t_cert
+    </select>
+
+    <select id="queryCertById" resultType="cert">
+        select * from t_cert where id = #{id}
+    </select>
+
+    <select id="queryCert4Page" resultType="cert">
+        select * from t_cert
+        limit #{start}, #{pagesize}
+    </select>
+    
+    <select id="queryCertCount4Page" resultType="int">
+        select count(*) from t_cert
+    </select>
+    
+    <insert id="insertCert">
+        insert into t_cert ( name ) values ( #{name} )
+    </insert>
+    
+    <insert id="insertCertPermission">
+        insert into t_cert_permission ( certid, permissionid ) values ( #{certid}, #{permissionid} )
+    </insert>
+    
+    <update id="updateCert">
+        update t_cert set name = #{name} where id = #{id}
+    </update>
+
+    <delete id="deleteCertById">
+        delete from t_cert where id = #{id}
+    </delete>
+    
+    <delete id="deleteCerts">
+        delete from t_cert where id in
+        <foreach collection="certs" item="cert" open="(" close=")" separator=",">
+        #{cert.id}
+        </foreach>
+    </delete>
+    
+    <delete id="deletePermissionByCertId">
+        delete from t_cert_permission where certid = #{certid}
+    </delete>
+
+</mapper>
